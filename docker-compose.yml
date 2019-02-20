@@ -1,0 +1,28 @@
+version: "2.1"
+services:
+  # ng_service: # name of the first service
+  #   container_name: ng_container
+  #   build: ./public # specify the directory of the Dockerfile
+  #   volumes:
+  #   - ./public:/usr/src/app
+  #   ports:
+  #     - "4200:4200" # specify port forewarding
+  node_service:
+    container_name: node_container
+    restart: always
+    build: .
+    ports:
+    - "8080:8080"
+    volumes:
+    - ./:/usr/src/app
+    links:
+    - mongo_service
+  mongo_service:
+    container_name: mongo_container
+    image: mongo
+    ports:
+    - "27017:27017"
+
+    
+    # volumes:
+    # - /data/db:/data/db
